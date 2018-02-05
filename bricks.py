@@ -1,5 +1,6 @@
 from pygame.sprite import Sprite
 
+
 class Brick(Sprite):
     def __init__(self, image, x, y, special_effect=None):
         Sprite.__init__(self)

@@ -3,6 +3,7 @@ from pygame.image import load
 
 IMAGE = load('images/food.png')
 
+
 class Ball(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)

@@ -17,4 +17,3 @@ while True:
     sprites.draw(screen)
     window.blit(screen, (0, 0))
     pygame.display.flip()
-

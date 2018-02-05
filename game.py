@@ -1,55 +1,48 @@
-from pygame.rect import Rect
+import pygame
+import sys
+
+from collections import defaultdict
 
 
-class GameObject:
-    def __init__(self, x, y, w, h, speed=(0,0)):
-        self.bounds = Rect(x, y, w, h)
-        self.speed = speed
+class Game:
+    def __init__(self,
+                 caption,
+                 width,
+                 height,
+                 back_image_filename,
+                 frame_rate):
+        self.background_image = \
+        pygame.image.load(back_image_filename)
+        self.frame_rate = frame_rate
+        self.game_over = False
+        self.objects = []
+        pygame.mixer.pre_init(44100, 16, 2, 4096)
+        pygame.init()
+        pygame.font.init()
+        self.surface = pygame.display.set_mode((width, height))
+        pygame.display.set_caption(caption)
+        self.clock = pygame.time.Clock()
+        self.keydown_handlers = defaultdict(list)
+        self.keyup_handlers = defaultdict(list)
+        self.mouse_handlers = []
 
-    @property
-    def left(self):
-        return self.bounds.left
 
-    @property
-    def right(self):
-        return self.bounds.right
+     def update(self):
+        for o in self.objects:
+            o.update()
 
-    @property
-    def top(self):
-        return self.bounds.top
+    def draw(self):
+        for o in self.objects:
+            o.draw(self.surface)
 
-    @property
-    def bottom(self):
-        return self.bounds.bottom
 
-    @property
-    def width(self):
-        return self.bounds.width
+     def run(self):
+        while not self.game_over:
+            self.surface.blit(self.background_image, (0, 0))
 
-    @property
-    def height(self):
-        return self.bounds.height
+            self.handle_events()
+            self.update()
+            self.draw()
 
-    @property
-    def center(self):
-        return self.bounds.center
-
-    @property
-    def centerx(self):
-        return self.bounds.centerx
-
-    @property
-    def centery(self):
-        return self.bounds.centery
-
-    def draw(self, surface):
-        pass
-
-    def move(self, dx, dy):
-        self.bounds = self.bounds.move(dx, dy)
-
-    def update(self):
-        if self.speed == [0, 0]:
-            return
-
-        self.move(*self.speed)
+            pygame.display.update()
+            self.clock.tick(self.frame_rate)

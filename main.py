@@ -1,18 +1,23 @@
 import pygame
-from ball import Ball
+import map
 
 pygame.init()
-window = pygame.display.set_mode((800, 600))
-screen = pygame.Surface((800, 600))
-
+window = pygame.display.set_mode(map.MAP_SIZE)
+screen = pygame.Surface(map.MAP_SIZE)
 sprites = pygame.sprite.Group()
-ball = Ball(244, 220)
-sprites.add(ball)
+ball = map.BALL
+platform = map.PLATFORM
+sprites.add(ball, platform)
 
 while True:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             pygame.quit()
+        if e.type == pygame.MOUSEBUTTONUP:
+            if pygame.mouse.get_pressed()[0]:
+                ball.isGlued = False
+    platform.update()
+    ball.update()
     screen.fill((0, 100, 200))
     sprites.draw(screen)
     window.blit(screen, (0, 0))

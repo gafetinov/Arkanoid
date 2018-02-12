@@ -14,7 +14,7 @@ while True:
         if e.type == pygame.QUIT:
             pygame.quit()
         if e.type == pygame.MOUSEBUTTONUP:
-            if pygame.mouse.get_pressed()[0]:
+            if e.button == 1:
                 ball.isGlued = False
     platform.update()
     ball.update()
@@ -22,3 +22,4 @@ while True:
     sprites.draw(screen)
     window.blit(screen, (0, 0))
     pygame.display.flip()
+    pygame.time.delay(10)

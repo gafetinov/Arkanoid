@@ -7,7 +7,8 @@ screen = pygame.Surface(map.MAP_SIZE)
 sprites = pygame.sprite.Group()
 ball = map.BALL
 platform = map.PLATFORM
-sprites.add(ball, platform)
+bricks = map.BRICKS
+sprites.add(ball, platform, bricks)
 
 while True:
     for e in pygame.event.get():
@@ -19,6 +20,7 @@ while True:
     platform.update()
     ball.update()
     screen.fill((0, 100, 200))
+    bricks.draw(screen)
     sprites.draw(screen)
     window.blit(screen, (0, 0))
     pygame.display.flip()

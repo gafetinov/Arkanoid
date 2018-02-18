@@ -1,4 +1,5 @@
 from pygame.sprite import Sprite
+from pygame.image import load
 
 
 class Brick(Sprite):

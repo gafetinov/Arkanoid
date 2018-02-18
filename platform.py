@@ -40,4 +40,3 @@ class Platform(Sprite):
     def update(self):
         self.move()
         self.edge_collide()
-

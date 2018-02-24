@@ -11,18 +11,19 @@ PLATFORM = Platform(0, 450)
 BALL = Ball(PLATFORM.rect.x + PLATFORM.width / 2 + 123, 433)
 brick_size = (80, 20)
 BRICKS = Group()
-level1 = ['          '
-          '          '
-          '          '
-          '          '
-          '----------'
-          '----------'
-          '----------'
-          '----------'
+level1 = ['          ',
+          '          ',
+          '          ',
+          '          ',
+          '----------',
+          '----------',
+          '----------',
+          '----------',
           '----------']
 x = 0
 y = 0
 for row in level1:
+    x = 0
     for cell in row:
         if cell == '-':
             BRICKS.add(Brick(green_brick, x, y))

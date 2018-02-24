@@ -10,3 +10,6 @@ class Brick(Sprite):
         self.rect.x = x
         self.rect.y = y
         self.special_effect = special_effect
+
+    def update(self):
+        pass

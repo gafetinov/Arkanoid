@@ -8,7 +8,7 @@ sprites = pygame.sprite.Group()
 ball = map.BALL
 platform = map.PLATFORM
 bricks = map.BRICKS
-sprites.add(ball, platform, bricks)
+sprites.add(ball, platform)
 
 while True:
     for e in pygame.event.get():
@@ -19,6 +19,7 @@ while True:
                 ball.isGlued = False
     platform.update()
     ball.update()
+    bricks.update()
     screen.fill((0, 100, 200))
     bricks.draw(screen)
     sprites.draw(screen)

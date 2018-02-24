@@ -1,4 +1,4 @@
-from pygame.sprite import Sprite, collide_mask
+from pygame.sprite import Sprite, collide_mask, collide_rect
 from pygame.image import load
 import math
 import map
@@ -25,6 +25,7 @@ class Ball(Sprite):
         else:
             self.edge_collide()
             self.platform_collide()
+            self.brick_collide()
             self.move()
 
     def move(self):
@@ -42,3 +43,9 @@ class Ball(Sprite):
             reflection_angle = map.PLATFORM.get_reflection_angle(self.rect.x)
             self.dx = self.speed*math.cos(reflection_angle)
             self.dy = -self.speed*math.sin(math.fabs(reflection_angle))
+
+    def brick_collide(self):
+        for brick in map.BRICKS:
+            if collide_rect(self, brick):
+                self.dy *= -1
+                brick.kill()
